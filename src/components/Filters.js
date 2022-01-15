@@ -79,6 +79,7 @@ const Filters = () => {
 								if (c === "all") {
 									return (
 										<button
+											key={i}
 											name="color"
 											onClick={updateFilters}
 											data-color="all"
@@ -104,6 +105,20 @@ const Filters = () => {
 								);
 							})}
 						</div>
+					</div>
+					<div className="form-control">
+						<h5>price</h5>
+						<p className="price">
+							{formatPrice(price)}
+							<input
+								type="range"
+								name="price"
+								onChange={updateFilters}
+								min={min_price}
+								max={max_price}
+								value={price}
+							/>
+						</p>
 					</div>
 				</form>
 			</div>
