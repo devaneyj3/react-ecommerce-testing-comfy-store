@@ -1,11 +1,13 @@
 import React, { useEffect, useContext, useReducer } from "react";
 import reducer from "../reducers/cart_reducer";
+import { useProductsContext } from "./products_context";
 import {
 	ADD_TO_CART,
 	REMOVE_CART_ITEM,
 	TOGGLE_CART_ITEM_AMOUNT,
 	CLEAR_CART,
 	COUNT_CART_TOTALS,
+	CHANGE_STOCK,
 } from "../actions";
 
 const getLocalStorage = () => {
@@ -34,13 +36,16 @@ export const CartProvider = ({ children }) => {
 	}, [state.cart]);
 
 	const addToCart = (id, color, amount, product) => {
+		// dispatch({ type: CHANGE_STOCK, payload: { amount } });
 		dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
 	};
 
 	const removeItem = (id) => {
 		dispatch({ type: REMOVE_CART_ITEM, payload: id });
 	};
-	const toggleAmount = (id, value) => {};
+	const toggleAmount = (id, value) => {
+		dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+	};
 	const clearCart = () => {
 		dispatch({ type: CLEAR_CART });
 	};

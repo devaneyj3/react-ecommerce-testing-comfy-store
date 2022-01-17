@@ -11,6 +11,7 @@ import {
 	GET_SINGLE_PRODUCT_BEGIN,
 	GET_SINGLE_PRODUCT_SUCCESS,
 	GET_SINGLE_PRODUCT_ERROR,
+	CHANGE_STOCK,
 } from "../actions";
 
 const initialState = {
@@ -54,12 +55,22 @@ export const ProductsProvider = ({ children }) => {
 		}
 	};
 
+	const changeStock = (op, amount) => {
+		dispatch({ type: CHANGE_STOCK, payload: { op, amount } });
+	};
+
 	useEffect(() => {
 		fetchProducts(url);
 	}, []);
 	return (
 		<ProductsContext.Provider
-			value={{ closeSidebar, openSidebar, fetchSingleProduct, ...state }}>
+			value={{
+				closeSidebar,
+				openSidebar,
+				fetchSingleProduct,
+				changeStock,
+				...state,
+			}}>
 			{children}
 		</ProductsContext.Provider>
 	);

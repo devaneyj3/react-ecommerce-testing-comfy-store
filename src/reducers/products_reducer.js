@@ -7,6 +7,7 @@ import {
 	GET_SINGLE_PRODUCT_BEGIN,
 	GET_SINGLE_PRODUCT_SUCCESS,
 	GET_SINGLE_PRODUCT_ERROR,
+	CHANGE_STOCK,
 } from "../actions";
 
 const products_reducer = (state, action) => {
@@ -56,8 +57,23 @@ const products_reducer = (state, action) => {
 		case GET_PRODUCTS_ERROR: {
 			return { ...state, products_loading: false, products_error: true };
 		}
-		default: {
-			return state;
+		case CHANGE_STOCK: {
+			let { op, amount } = action.payload;
+			console.log("changing amount by, ", amount);
+			const { stock } = state.single_product;
+			console.log("stock is", stock);
+			if (op === "inc") {
+				let stockAmount = stock - amount;
+				console.log(`${stock} - ${amount}`);
+				return {
+					...state,
+					single_product: {
+						...state.single_product,
+						stock: stockAmount,
+					},
+				};
+			}
+			return { ...state, products_loading: false, products_error: true };
 		}
 	}
 	throw new Error(`No Matching "${action.type}" - action type`);
