@@ -12,7 +12,9 @@ import {
 const filter_reducer = (state, action) => {
 	switch (action.type) {
 		case LOAD_PRODUCTS:
+			console.log(action.payload);
 			let maxPrice = action.payload.map((p) => p.price);
+			console.log("maxPrice", maxPrice);
 			maxPrice = Math.max(...maxPrice);
 			return {
 				...state,
@@ -121,8 +123,9 @@ const filter_reducer = (state, action) => {
 					shipping: false,
 				},
 			};
+		default:
+			return new Error(`No Matching "${action.type}" - action type`);
 	}
-	throw new Error(`No Matching "${action.type}" - action type`);
 };
 
 export default filter_reducer;

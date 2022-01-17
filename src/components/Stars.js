@@ -4,12 +4,17 @@ import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 const Stars = ({ stars, reviews }) => {
 	const tempStars = Array.from({ length: 5 }, (_, index) => {
 		const number = index + 0.5;
-		if (index + 1 <= stars) {
-			return <BsStarFill />;
-		}
-		if (stars >= number) {
-			return <BsStarHalf />;
-		} else return <BsStar />;
+		return (
+			<span key={index}>
+				{stars >= index + 1 ? (
+					<BsStarFill />
+				) : stars >= number ? (
+					<BsStarHalf />
+				) : (
+					<BsStar />
+				)}
+			</span>
+		);
 	});
 	return (
 		<Wrapper>

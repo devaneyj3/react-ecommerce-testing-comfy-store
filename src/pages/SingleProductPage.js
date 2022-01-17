@@ -26,6 +26,7 @@ const SingleProductPage = () => {
 
 	useEffect(() => {
 		fetchSingleProduct(`${url}${id}`);
+		// eslint-disable-next-line
 	}, []);
 	useEffect(() => {
 		if (error) {
@@ -33,6 +34,7 @@ const SingleProductPage = () => {
 				history.push("/");
 			}, 3000);
 		}
+		// eslint-disable-next-line
 	}, [error]);
 
 	if (loading) {
@@ -52,7 +54,7 @@ const SingleProductPage = () => {
 		company,
 		images,
 	} = product;
-	console.log(stock);
+
 	return (
 		<Wrapper>
 			<PageHero title={name} product />
