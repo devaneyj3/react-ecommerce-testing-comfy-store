@@ -12,9 +12,7 @@ import {
 const filter_reducer = (state, action) => {
 	switch (action.type) {
 		case LOAD_PRODUCTS:
-			console.log(action.payload);
 			let maxPrice = action.payload.map((p) => p.price);
-			console.log("maxPrice", maxPrice);
 			maxPrice = Math.max(...maxPrice);
 			return {
 				...state,
